@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ma wishlist d’anniversaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f7fb; --surface:#ffffff; --ink:#14161f; --muted:#6b7084; --line:#e6e8f0;
+  --accent:#5b5bf0; --accent-2:#ff6b9a; --accent-ink:#ffffff; --shadow:0 1px 2px rgba(20,22,31,.04),0 10px 30px rgba(20,22,31,.06);
+  --tile-a:#eef0ff; --tile-b:#ffeef4;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1017; --surface:#171a24; --ink:#f1f2f8; --muted:#9a9fb5; --line:#252938;
+    --accent:#8b8bff; --accent-2:#ff7fa8; --accent-ink:#0e1017; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    --tile-a:#20244a; --tile-b:#3a1f2e; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1017; --surface:#171a24; --ink:#f1f2f8; --muted:#9a9fb5; --line:#252938;
+  --accent:#8b8bff; --accent-2:#ff7fa8; --accent-ink:#0e1017; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  --tile-a:#20244a; --tile-b:#3a1f2e; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;
+  background-image:radial-gradient(60rem 30rem at 15% -10%,color-mix(in srgb,var(--accent) 14%,transparent),transparent),radial-gradient(50rem 28rem at 100% 0%,color-mix(in srgb,var(--accent-2) 12%,transparent),transparent);
+  background-repeat:no-repeat;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:56px 20px 80px}
+header{text-align:center;margin-bottom:36px}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.05;letter-spacing:-.03em;font-weight:800;margin:0 0 12px;
+  background:linear-gradient(100deg,var(--accent),var(--accent-2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:200% 100%;animation:shift 9s ease-in-out infinite alternate}
+@keyframes shift{to{background-position:100% 0}}
+header p{margin:0;color:var(--muted);font-size:16px}
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+  padding:12px;margin:0 0 28px;background:color-mix(in srgb,var(--surface) 80%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:600;font-size:14px;padding:8px 14px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.chip:hover{color:var(--ink);background:var(--line)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.search{flex:1 1 180px;max-width:260px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;padding:9px 14px;border-radius:999px;outline:none;transition:border-color .2s,box-shadow .2s}
+.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.chip:focus-visible,.btn:focus-visible,.done:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,opacity .35s;animation:in .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*40ms)}
+.card:hover{transform:translateY(-4px)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.tile{position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:14px;display:grid;place-items:center;font-size:58px;background:linear-gradient(135deg,var(--tile-a),var(--tile-b));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card:hover .tile{transform:scale(1.03)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:8px}
+.body{padding:14px 6px 4px;flex:1}
+.body h2{margin:0 0 4px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.body p{margin:0;font-size:13.5px;color:var(--muted)}
+.row{display:flex;gap:8px;padding:10px 6px 4px;align-items:center}
+.btn{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:14px;color:var(--accent-ink);background:var(--accent);padding:11px 14px;border-radius:12px;transition:filter .2s,transform .2s}
+.btn:hover{filter:brightness(1.08);transform:scale(1.02)}
+.done{border:1px solid var(--line);background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;padding:10px 12px;border-radius:12px;cursor:pointer;transition:all .25s}
+.done:hover{color:var(--ink);border-color:var(--muted)}
+.card.is-done{opacity:.5}
+.card.is-done .btn{background:var(--line);color:var(--muted);pointer-events:none}
+.card.is-done .done{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0}
+.snow{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.snow i{position:absolute;top:-20px;font-style:normal;color:var(--accent);opacity:.35;animation:fall linear infinite}
+@keyframes fall{to{transform:translate3d(30px,110vh,0);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.snow{display:none}}
+.card{position:relative}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 65%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::before{opacity:1}
+.ctl{display:flex;gap:8px;align-items:center;flex:1 1 auto;justify-content:flex-end;flex-wrap:wrap}
+.sel{border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;padding:9px 12px;border-radius:999px;cursor:pointer}
+.icon{border:1px solid var(--line);background:var(--bg);color:var(--ink);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:16px;transition:transform .3s}
+.icon:hover{transform:rotate(25deg)}
+.sel:focus-visible,.icon:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bar{height:6px;max-width:320px;margin:18px auto 0;background:var(--line);border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:inherit;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+</style>
+</head>
+<body>
+<div class="snow" id="snow" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <h1>Ma wishlist d’anniversaire</h1>
+    <p id="count"></p>
+    <div class="bar" aria-hidden="true"><span id="fill"></span></div>
+  </header>
+  <div class="tools">
+    <div class="chips" id="chips" role="group" aria-label="Catégories"></div>
+    <div class="ctl">
+      <input class="search" id="q" type="search" placeholder="Rechercher… ( / )" aria-label="Rechercher un cadeau">
+      <select class="sel" id="sort" aria-label="Trier"><option value="def">Ordre d’origine</option><option value="az">A → Z</option><option value="shop">Par boutique</option></select>
+      <button class="icon" id="theme" type="button" aria-label="Changer de thème">🌓</button>
+    </div>
+  </div>
+  <main class="grid" id="grid"></main>
+</div>
+<script>
+const ITEMS=[
+{n:"Parfum Wave Child",s:"Room 1015",c:"Parfums",e:"🧴",i:"https://room1015.com/themes/classicchild/assets/img/3D/Wave_Child-Still.png",u:"https://room1015.com/100-ml/77-135-wavechild-eau-de-parfum.html#/36-wavechild-100_ml"},
+{n:"Parfum Pharaon",s:"Le Sablier",c:"Parfums",e:"🏺",i:"https://lesablier.com/cdn/shop/t/28/assets/pharaon-review-gallery-1.jpg?v=57029387112178975201794537566",u:"https://lesablier.com/products/pharaon"},
+{n:"Parfums miniatures Versace",s:"Nocibé",c:"Parfums",e:"✨",i:"https://media.nocibe.fr/medias/b4exN51276622-1-global.jpg?context=bWFzdGVyfGltYWdlc3wxMzc5OTN8aW1hZ2UvanBlZ3xhR0ZsTDJoaFpDODJPVGMxTnpRNU56RXhORFkxTkM5aU5HVjRUalV4TWpjMk5qSXlYekZmWjJ4dlltRnNMbXB3Wnd8NjE4MDdmZDM5Y2I1NmNlYmIyMDlmY2YxNTYxZDU4YzQzZDYxZTYzZWYxNGYxNjAxMmIxYmFiNjhjZGIzNzM5NA&grid=true&imdensity=1&imwidth=775",u:"https://www.nocibe.fr/fr/p/5011992259"},
+{n:"Mini projecteur Magcubic",s:"Amazon",c:"Tech",e:"📽️",i:"https://m.media-amazon.com/images/I/61kfNgreIWL._AC_SX679_.jpg",u:"https://www.amazon.fr/dp/B0HGLZM3R6"},
+{n:"Clavier AJAZZ",s:"Amazon",c:"Tech",e:"⌨️",i:"https://m.media-amazon.com/images/I/71oWO-UBryL._AC_SX679_.jpg",u:"https://www.amazon.fr/AJAZZ-Clavier-Gaming-Filaire-Touches/dp/B0G8G1Y8RL"},
+{n:"Tapis de souris Artisan FX Zero",s:"Maxesport",c:"Tech",e:"🖱️",i:"https://maxesport.gg/cdn/shop/files/Artisan-FX-Zero-Black-2_b846edac-00be-450d-b019-69de1e4ab4dd.webp?v=1783093933&width=1000",u:"https://maxesport.gg/fr/products/artisan-fx-zero-soft-xl-noir"},
+{n:"EarPods USB-C",s:"Apple",c:"Tech",e:"🎧",i:"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MTJY3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=Y1B2Rk5LMWY4dldFczFQRktGMnBzQWtuVHYzMERCZURia3c5SzJFOTlPZ3g4bUUvaUhjM1pNYS9QZDhuRlp2SWxsWkpjY2g2U1oxTURTR2JLZHQrenc",u:"https://www.apple.com/fr/shop/product/myqy3zm/a/earpods-usb-c"},
+{n:"Bracelet LV Instinct",s:"Louis Vuitton",c:"Mode",e:"💎",i:"https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-bracelet-lv-instinct--M00508_PM2_Front%20view.png?wid=1300&hei=1300",u:"https://fr.louisvuitton.com/fra-fr/produits/bracelet-lv-instinct-s00-nvprod3280017v/M00508"},
+{n:"Collier chaîne acier torsadée",s:"Bershka",c:"Mode",e:"📿",i:"https://static.bershka.net/assets/public/a0ad/928a/2cbe45d6afee/93f5b14453cb/04879678808-p/04879678808-p.jpg?ts=1737022810022&w=850",u:"https://www.bershka.com/fr/cha%C3%AEne-acier-torsad%C3%A9e-c0p209139016.html?colorId=808"},
+{n:"Sneakers Puma LaMelo Ball",s:"StockX",c:"Mode",e:"👟",i:"https://img.hypeboost.com/products/puma-lamelo-ball-lafrance-amour-black/w900/img02.jpg",u:"https://stockx.com/puma-lamelo-ball-lafrance-amour-black?size=10.5"},
+{n:"Cagoule hiking camo",s:"Luvz",c:"Mode",e:"🧢",i:"https://www.luvz.ch/cdn/shop/files/luvz-camo-1-front-green-seams.jpg?v=1792170449&width=900",u:"https://www.luvz.ch/products/camo-classic-camo-light-green"},
+{n:"Gourde Nike Recharge 71 cl",s:"Nike",c:"Sport",e:"🥤",i:"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/a32e619d-b5b3-45d1-b6c6-a6ed36776943/NK+TR+RENEW+RCHRG+CHUG+BTL+24.png",u:"https://www.nike.com/fr/t/gourde-en-tritan-nike-recharge-71-cl-hq6WnuNa/DX7028-044"},
+{n:"T-shirt compression Under Armour",s:"Intersport · blanc et noir",c:"Sport",e:"👕",i:"https://media.intersport.fr/is/image/intersportfr/13615183BR_FA?$product_grey$&layer=comp&fit=constrain,0&$produit_xl$&fmt=webp",u:"https://www.intersport.fr/blanc_et_noir-tee_shirt_de_compression_a_manches_courtes_homme_heatgear-under_armour-p-13615183BR/"},
+{n:"T-shirt compression Under Armour",s:"Intersport · noir et blanc",c:"Sport",e:"👕",i:"https://media.intersport.fr/is/image/intersportfr/13615183HE_FA?$product_grey$&layer=comp&fit=constrain,0&$produit_xl$&fmt=webp",u:"https://www.intersport.fr/noir_et_blanc-tee_shirt_de_compression_a_manches_courtes_homme_heatgear-under_armour-p-13615183HE/"},
+{n:"Balance connectée Eufy P3",s:"Amazon",c:"Sport",e:"⚖️",i:"https://m.media-amazon.com/images/I/71mAt6BYiZL._AC_SX679_.jpg",u:"https://www.amazon.fr/dp/B09LV2K716"},
+{n:"Tondeuse OneBlade Pro 360",s:"Philips",c:"Soin",e:"💈",i:"https://images.philips.com/is/image/philipsconsumer/ca4c0362f8884baa90e9b11d0092e6b7?$png$&wid=632&hei=632&fit=constrain",u:"https://www.philips.fr/c-p/QP6542_15R1/oneblade-pro-360-refurbished-face-plus-body"},
+{n:"Massager kit",s:"Amazon",c:"Soin",e:"💆",u:"https://www.amazon.fr/dp/B09HV3329D"},
+];
+const grid=document.getElementById('grid'),chips=document.getElementById('chips'),q=document.getElementById('q'),count=document.getElementById('count');
+const sortEl=document.getElementById('sort'),fill=document.getElementById('fill');
+let cat='Tous',done={};
+try{done=JSON.parse(localStorage.getItem('wl-done')||'{}')}catch(e){}
+const key=i=>i.n+'|'+i.s;
+const cats=['Tous',...new Set(ITEMS.map(i=>i.c))];
+cats.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',c===cat);
+  b.onclick=()=>{cat=c;[...chips.children].forEach(x=>x.setAttribute('aria-pressed',x===b));render()};chips.appendChild(b)});
+function stats(){const left=ITEMS.filter(i=>!done[key(i)]).length;
+  stats();
+  fill.style.width=(100*(ITEMS.length-left)/ITEMS.length)+'%'}
+function esc(s){return s.replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function render(){
+  const t=q.value.trim().toLowerCase();
+  const list=ITEMS.filter(i=>(cat==='Tous'||i.c===cat)&&(i.n+' '+i.s).toLowerCase().includes(t));
+  if(sortEl.value==='az')list.sort((a,b)=>a.n.localeCompare(b.n,'fr'));
+  if(sortEl.value==='shop')list.sort((a,b)=>a.s.localeCompare(b.s,'fr'));
+  grid.innerHTML=list.length?list.map((i,k)=>`<article class="card${done[key(i)]?' is-done':''}" style="--i:${k}">
+    <div class="tile" aria-hidden="true"><span>${i.e}</span>${i.i?'<img src="'+esc(i.i)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':''}</div>
+    <div class="body"><h2>${esc(i.n)}</h2><p>${esc(i.s)}</p></div>
+    <div class="row"><a class="btn" href="${esc(i.u)}" target="_blank" rel="noopener">Voir le produit</a>
+    <button class="done" data-k="${esc(key(i))}">${done[key(i)]?'Offert ✓':'Déjà offert ?'}</button></div></article>`).join(''):'<p class="empty">Aucun cadeau ne correspond à cette recherche.</p>';
+  const left=ITEMS.filter(i=>!done[key(i)]).length;
+  stats();
+}
+grid.addEventListener('click',e=>{const b=e.target.closest('.done');if(!b)return;const k=b.dataset.k;
+  done[k]=!done[k];if(!done[k])delete done[k];try{localStorage.setItem('wl-done',JSON.stringify(done))}catch(e){}
+  b.closest('.card').classList.toggle('is-done',!!done[k]);b.textContent=done[k]?'Offert ✓':'Déjà offert ?';
+  const left=ITEMS.filter(i=>!done[key(i)]).length;stats()});
+q.addEventListener('input',render);
+sortEl.addEventListener('change',render);
+const root=document.documentElement;
+try{const t=localStorage.getItem('wl-theme');if(t)root.dataset.theme=t}catch(e){}
+document.getElementById('theme').onclick=()=>{
+  const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  const n=dark?'light':'dark';root.dataset.theme=n;try{localStorage.setItem('wl-theme',n)}catch(e){}};
+grid.addEventListener('pointermove',e=>{const c=e.target.closest('.card');if(!c)return;const r=c.getBoundingClientRect();
+  c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==q){e.preventDefault();q.focus()}});
+grid.addEventListener('error',e=>{if(e.target.tagName==='IMG')e.target.remove()},true);
+const snow=document.getElementById('snow'),fl=['❄','❅','❆'];
+for(let i=0;i<14;i++){const s=document.createElement('i');s.textContent=fl[i%3];s.style.left=(i*7+3)+'%';s.style.fontSize=(12+i%4*5)+'px';
+  s.style.animationDuration=(12+i%5*3)+'s';s.style.animationDelay=(-i*1.7)+'s';snow.appendChild(s)}
+render();
+</script>
+</body>
+</html>
