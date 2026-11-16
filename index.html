@@ -118,14 +118,16 @@ const ITEMS=[
 {n:"T-shirt compression Under Armour",s:"Intersport · noir et blanc",c:"Sport",e:"👕",i:"https://media.intersport.fr/is/image/intersportfr/13615183HE_FA?$product_grey$&layer=comp&fit=constrain,0&$produit_xl$&fmt=webp",u:"https://www.intersport.fr/noir_et_blanc-tee_shirt_de_compression_a_manches_courtes_homme_heatgear-under_armour-p-13615183HE/"},
 {n:"Balance connectée Eufy P3",s:"Amazon",c:"Sport",e:"⚖️",i:"https://m.media-amazon.com/images/I/71mAt6BYiZL._AC_SX679_.jpg",u:"https://www.amazon.fr/dp/B09LV2K716"},
 {n:"Tondeuse OneBlade Pro 360",s:"Philips",c:"Soin",e:"💈",i:"https://images.philips.com/is/image/philipsconsumer/ca4c0362f8884baa90e9b11d0092e6b7?$png$&wid=632&hei=632&fit=constrain",u:"https://www.philips.fr/c-p/QP6542_15R1/oneblade-pro-360-refurbished-face-plus-body"},
-{n:"Massager kit",s:"Amazon",c:"Soin",e:"💆",u:"https://www.amazon.fr/dp/B09HV3329D"},
+{n:"Massager kit",s:"Amazon",c:"Soin",e:"💆",i:"https://m.media-amazon.com/images/I/811-m6AT3AL._AC_SX679_.jpg",u:"https://www.amazon.fr/dp/B09HV3329D"},
+{n:"Urus 700 ch Alcantara",s:"LaCentrale",c:"",e:"🚙",i:"https://pictures.lacentrale.fr/classifieds/W103514582_STANDARD_0.jpg?fit=inside&format=webp&lastUpdated=1782985796&size=1096x829&signature=fa391e673b305471f216a9928dc9b3774027b825fc202d1b5fb19936",u:"https://www.lacentrale.fr/auto-occasion-annonce-87103514582.html"},
+{n:"Compte 25k funded",s:"Lucid Trading",c:"",e:"📈",i:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp71y97-bJiqwl5Lk4uw7dw9GzBSh-KNiGw3_fYqXyO1XTV7WOzXjj340&s=10",u:"https://lucidtrading.com/#plans"},
 ];
 const grid=document.getElementById('grid'),chips=document.getElementById('chips'),q=document.getElementById('q'),count=document.getElementById('count');
 const sortEl=document.getElementById('sort'),fill=document.getElementById('fill');
 let cat='Tous',done={};
 try{done=JSON.parse(localStorage.getItem('wl-done')||'{}')}catch(e){}
 const key=i=>i.n+'|'+i.s;
-const cats=['Tous',...new Set(ITEMS.map(i=>i.c))];
+const cats=['Tous',...new Set(ITEMS.map(i=>i.c).filter(Boolean))];
 cats.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',c===cat);
   b.onclick=()=>{cat=c;[...chips.children].forEach(x=>x.setAttribute('aria-pressed',x===b));render()};chips.appendChild(b)});
 function stats(){const left=ITEMS.filter(i=>!done[key(i)]).length;
